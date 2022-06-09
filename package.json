@@ -14,6 +14,8 @@
     "astro": "^1.0.0-beta.42"
   },
   "dependencies": {
-    "prettier-plugin-astro": "0.1.0-next.5"
+    "poly-fluid-sizing": "^1.2.1",
+    "prettier-plugin-astro": "0.1.0-next.5",
+    "sass": "^1.52.3"
   }
 }

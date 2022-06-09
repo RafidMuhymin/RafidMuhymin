@@ -1,0 +1,7 @@
+@use "tailwind";
+@use "typography";
+
+hr {
+  border-width: 1.125px;
+  @apply border-slate-300;
+}
