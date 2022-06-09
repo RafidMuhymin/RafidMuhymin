@@ -1,3 +1,34 @@
-<footer class="p-4 text-center">
-  <p>Copyright © 2022 Rafid Muhymin Wafi All Rights Reserved</p>
+<footer class="p-4 text-gray-900">
+  <div class="p-3 flex gap-3 justify-center items-center">
+    <a href="https://github.com/RafidMuhymin/">
+      <i
+        class="iconify"
+        data-icon="logos:github-icon"
+        data-width="2rem"
+        data-height="2rem"
+      >
+      </i>
+    </a>
+
+    <a href="https://www.linkedin.com/in/rafidmuhymin/">
+      <i
+        class="iconify"
+        data-icon="logos:linkedin-icon"
+        data-width="2rem"
+        data-height="2rem"
+      >
+      </i>
+    </a>
+  </div>
+
+  <p class="text-center">
+    Copyright ©
+
+    <script is:inline>
+      document.currentScript.outerHTML = new Date().getFullYear();
+    </script>
+
+    <noscript>{new Date().getFullYear()}</noscript>
+    - Rafid Muhymin Wafi - All Rights Reserved
+  </p>
 </footer>
