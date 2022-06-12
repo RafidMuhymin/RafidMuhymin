@@ -1,6 +1,12 @@
 @use "tailwind";
 @use "typography";
 
+*:focus,
+*:focus-visible {
+  outline: 1rem auto #2563eb;
+  outline-offset: 0.375rem;
+}
+
 hr {
   border-width: 1.125px;
   @apply border-slate-300;
