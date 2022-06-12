@@ -1,15 +1,11 @@
 <style lang="scss">
-  nav {
-    transition: left 0.5s;
-  }
-
   a:not([download]) {
     padding: 0.375rem 0.5rem;
     background-image: linear-gradient(-45deg, #f37335 0%, #fdc830 100%);
     background-repeat: no-repeat;
     background-position: bottom center;
     background-size: 0% 10%;
-    transition: background-size 0.25s ease-in-out;
+    transition: background-size 0.15s ease-in-out;
 
     &:hover {
       text-decoration-line: none;
@@ -18,16 +14,32 @@
   }
 
   @media screen and (max-width: 1023px) {
+    nav,
+    nav * {
+      width: 0;
+      height: 0;
+    }
+
+    nav * {
+      left: -100%;
+      position: relative;
+    }
+
     input:checked {
       ~ header {
         height: 100vh;
 
         nav {
-          left: 0%;
-          width: auto;
+          width: 100%;
           height: auto;
           flex-grow: 1;
           justify-content: space-evenly;
+        }
+
+        nav * {
+          left: 0;
+          width: auto;
+          height: auto;
         }
       }
     }
@@ -55,9 +67,7 @@
     </label>
   </div>
 
-  <nav
-    class="gap-3 w-0 h-0 lg:w-auto lg:h-auto overflow-hidden relative -left-full lg:static items-center flex flex-col lg:flex-row"
-  >
+  <nav class="gap-3 overflow-hidden items-center flex flex-col lg:flex-row">
     <a href="#about">About Me</a>
     <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
@@ -73,15 +83,45 @@
 </header>
 
 <script>
-  document.querySelector("#menu-button").onclick = ({ target }) => {
-    if (target.checked && window.innerWidth < 1024) {
+  const menuButton = document.querySelector("#menu-button");
+
+  window.matchMedia("(min-width : 1024px)").onchange = ({ matches }) => {
+    if (matches) {
+      document.body.style.overflow = "auto";
+    } else if (menuButton.checked) {
       document.body.style.overflowY = "hidden";
     }
   };
 
-  document.addEventListener("resize", () => {
-    if (window.innerWidth > 1023) {
-      document.body.style.overflowY = "scroll";
+  menuButton.onclick = ({ target }) => {
+    const navlinks = target.nextElementSibling.querySelectorAll("nav *");
+
+    if (target.checked && window.innerWidth < 1024) {
+      document.body.style.overflow = "hidden";
+
+      navlinks.forEach((link, index) => {
+        link.animate({ left: ["-100%", 0] }, 200 + index * 100);
+      });
+    } else {
+      target.checked = true;
+
+      navlinks.forEach((link, index) => {
+        const animationDuration = 500,
+          leftStartPosition = "0%",
+          leftEndPosition = `-${(navlinks.length - index) * 100}%`;
+
+        const animation = link.animate(
+          { left: [leftStartPosition, leftEndPosition] },
+          animationDuration
+        );
+
+        if (index === navlinks.length - 1) {
+          animation.onfinish = () => {
+            target.checked = false;
+            document.body.style.overflow = "auto";
+          };
+        }
+      });
     }
-  });
+  };
 </script>
