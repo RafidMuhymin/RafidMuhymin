@@ -13,7 +13,7 @@
     }
   }
 
-  @media screen and (max-width: 1023px) {
+  @media screen and (max-width: 639px) {
     nav,
     nav * {
       width: 0;
@@ -47,8 +47,6 @@
         nav {
           width: 100%;
           height: auto;
-          flex-grow: 1;
-          justify-content: space-evenly;
         }
 
         nav * {
@@ -59,47 +57,29 @@
       }
     }
   }
-
-  @keyframes crossToEqual {
-    from {
-      transform: rotate(45deg);
-    }
-
-    to {
-      transform: rotate(0deg);
-    }
-  }
-
-  @keyframes equalToCross {
-    from {
-      transform: rotate(0deg);
-    }
-
-    to {
-      transform: rotate(45deg);
-    }
-  }
 </style>
 
 <input tabindex={-1} type="checkbox" id="menu-button" class="hidden" />
 
 <header
-  class="text-center px-6 py-2 gap-0 lg:gap-4 flex flex-col lg:flex-row lg:justify-between items-center"
+  class="text-center px-3 sm:px-6 py-2 gap-0 sm:gap-4 flex sm:block lg:flex flex-col sm:flex-row sm:justify-between items-center"
 >
-  <div class="w-full lg:w-auto flex justify-between items-center">
+  <div class="gap-2 w-full sm:w-auto flex justify-evenly items-center">
     <h1>Rafid Muhymin Wafi</h1>
 
     <label
       tabindex={0}
       for="menu-button"
-      class="p-2 gap-2 flex flex-col lg:hidden hover:cursor-pointer select-none"
+      class="p-2 gap-2 flex flex-col sm:hidden hover:cursor-pointer select-none"
     >
       <div class="w-8 h-1 bg-black transition-all"></div>
       <div class="w-8 h-1 bg-black transition-all"></div>
     </label>
   </div>
 
-  <nav class="gap-3 overflow-hidden items-center flex flex-col lg:flex-row">
+  <nav
+    class="gap-3 overflow-hidden items-center flex justify-evenly flex-col sm:flex-row flex-grow lg:flex-grow-0"
+  >
     <a href="#about">About Me</a>
     <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
@@ -117,7 +97,7 @@
 <script>
   const menuButton = document.querySelector("#menu-button");
 
-  window.matchMedia("(min-width : 1024px)").onchange = ({ matches }) => {
+  window.matchMedia("(min-width : 640px)").onchange = ({ matches }) => {
     if (matches) {
       document.body.style.overflow = "auto";
     } else if (menuButton.checked) {
@@ -128,7 +108,7 @@
   menuButton.onclick = ({ target }) => {
     const navlinks = target.nextElementSibling.querySelectorAll("nav *");
 
-    if (target.checked && window.innerWidth < 1024) {
+    if (target.checked && window.innerWidth < 640) {
       document.body.style.overflow = "hidden";
 
       navlinks.forEach((link, index) => {
