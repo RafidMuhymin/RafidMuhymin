@@ -29,6 +29,21 @@
       ~ header {
         height: 100vh;
 
+        > div label {
+          gap: 0;
+
+          div {
+            &:first-of-type {
+              margin-bottom: -0.25rem;
+              transform: rotate(45deg);
+            }
+
+            &:last-of-type {
+              transform: rotate(-45deg);
+            }
+          }
+        }
+
         nav {
           width: 100%;
           height: auto;
@@ -44,6 +59,26 @@
       }
     }
   }
+
+  @keyframes crossToEqual {
+    from {
+      transform: rotate(45deg);
+    }
+
+    to {
+      transform: rotate(0deg);
+    }
+  }
+
+  @keyframes equalToCross {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(45deg);
+    }
+  }
 </style>
 
 <input tabindex={-1} type="checkbox" id="menu-button" class="hidden" />
@@ -57,13 +92,10 @@
     <label
       tabindex={0}
       for="menu-button"
-      class="p-2 block lg:hidden hover:cursor-pointer select-none"
+      class="p-2 gap-2 flex flex-col lg:hidden hover:cursor-pointer select-none"
     >
-      <i
-        class="iconify"
-        data-icon="flat-color-icons:menu"
-        data-width="2rem"
-        data-height="2rem"></i>
+      <div class="w-8 h-1 bg-black transition-all"></div>
+      <div class="w-8 h-1 bg-black transition-all"></div>
     </label>
   </div>
 
