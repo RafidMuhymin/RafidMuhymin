@@ -1,5 +1,26 @@
-<header>
-    <nav>
-        <h1>Header</h1>
-    </nav>
+<style lang="scss">
+  a {
+    padding: 0.375rem 0.5rem;
+    background-image: linear-gradient(-45deg, #f37335 0%, #fdc830 100%);
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: 0% 10%;
+    transition: background-size 0.25s ease-in-out;
+
+    &:hover {
+      text-decoration-line: none;
+      background-size: 100% 10%;
+    }
+  }
+</style>
+
+<header class="text-center px-6 py-2 gap-4 flex justify-between items-center">
+  <h1>Rafid Muhymin Wafi</h1>
+
+  <nav class="flex gap-3 items-center">
+    <a href="#about">About Me</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+    <a href="#download_resume">Resume</a>
+  </nav>
 </header>
