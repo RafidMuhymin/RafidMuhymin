@@ -75,6 +75,7 @@
       tabindex={0}
       for="menu-button"
       class="p-2 gap-2 flex flex-col sm:hidden hover:cursor-pointer select-none"
+      onkeyup="event.key === 'Enter' && this.click()"
     >
       <div class="w-8 h-1 bg-black transition-all"></div>
       <div class="w-8 h-1 bg-black transition-all"></div>
