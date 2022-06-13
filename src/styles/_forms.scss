@@ -1,0 +1,25 @@
+input,
+textarea,
+button {
+  &:focus,
+  &:focus-visible {
+    outline-offset: 0.125rem;
+  }
+}
+
+input,
+textarea {
+  @apply p-3 text-black rounded-[0.25rem];
+}
+
+input {
+  @apply h-10;
+}
+
+textarea {
+  @apply h-32;
+}
+
+::placeholder {
+  color: rgb(156, 163, 175) !important;
+}
