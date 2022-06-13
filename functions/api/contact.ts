@@ -1,9 +1,15 @@
 export async function onRequestPost({ request, env }) {
-  const { EmailJSAPIEndpoint, service_id, template_id, user_id } = env;
+  const {
+    EMAILJS_API_ENDPOINT,
+    SERVICE_ID: service_id,
+    TEMPLATE_ID: template_id,
+    USER_ID: user_id,
+    ACCESS_TOKEN: accessToken,
+  } = env;
 
   const template_params = Object.fromEntries(await request.formData());
 
-  return fetch(EmailJSAPIEndpoint, {
+  return fetch(EMAILJS_API_ENDPOINT, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,6 +19,7 @@ export async function onRequestPost({ request, env }) {
       template_id,
       user_id,
       template_params,
+      accessToken,
     }),
   })
     .then((res) => res.text())
