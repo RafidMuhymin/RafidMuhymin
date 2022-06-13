@@ -1,7 +1,3 @@
-<style>
-
-</style>
-
 <section class="px-8 pt-8 pb-12 bg-slate-900 text-gray-50">
   <div class="max-w-[640px] mx-auto">
     <div class="mb-8 text-center">
@@ -11,20 +7,25 @@
       </p>
     </div>
 
-    <form class="gap-4 flex flex-col text-gray-300">
+    <form
+      method="POST"
+      action="/api/contact"
+      enctype="multipart/form-data"
+      class="gap-4 flex flex-col text-gray-300"
+    >
       <label class="gap-2 flex flex-col">
         Enter Your Full Name
-        <input type="text" required />
+        <input type="text" name="name" required />
       </label>
 
       <label class="gap-2 flex flex-col">
         Enter Your Email Address
-        <input type="email" required />
+        <input type="email" name="email" required />
       </label>
 
       <label class="gap-2 flex flex-col">
         Enter Your Message
-        <textarea required></textarea>
+        <textarea name="message" required></textarea>
       </label>
 
       <button type="submit" class="mt-2 mx-auto btn"
@@ -33,3 +34,40 @@
     </form>
   </div>
 </section>
+
+<!-- <script>
+  const EmailJSAPIEndpoint = "https://api.emailjs.com/api/v1.0/email/send",
+    service_id = "service_mcqyxho",
+    template_id = "template_5a42sr1",
+    user_id = "J17NaZ34EmhUYGdAW";
+
+  document
+    .querySelector("#contact-form")
+    .addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const template_params = Object.fromEntries(new FormData(event.target));
+
+      fetch(EmailJSAPIEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          service_id,
+          template_id,
+          user_id,
+          template_params,
+        }),
+      })
+        .then((res) => res.text())
+        .then((res) => {
+          if (res === "OK") {
+          } else {
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+</script> -->
