@@ -1,10 +1,12 @@
 @use "tailwind";
 @use "typography";
+@use "forms";
+@use "buttons";
 
 *:focus,
 *:focus-visible {
-  outline: 1rem auto #2563eb;
   outline-offset: 0.375rem;
+  outline: 1rem auto rgb(37, 99, 235);
 }
 
 hr {
