@@ -18,9 +18,11 @@
     }
 
     button > span {
-      @apply w-[8.75rem] text-center flex text-4xl -my-[0.125rem];
+      &:first-of-type.hidden + span {
+        display: flex;
+      }
 
-      svg {
+      &:last-of-type svg {
         @apply mx-auto animate-spin;
       }
     }
@@ -53,7 +55,12 @@
       </label>
 
       <button type="submit" class="mt-2 mx-auto btn">
-        Send Message <i class="iconify" data-icon="bi:send"></i>
+        <span>Send Message <i class="iconify" data-icon="bi:send"></i></span>
+
+        <span class="hidden w-[8.75rem] text-center text-4xl -my-[0.125rem]"
+          ><i class="iconify" data-icon="ei:spinner-3"></i>
+          <span class="sr-only">Sending...</span>
+        </span>
       </button>
     </form>
   </div>
@@ -68,8 +75,6 @@
     }, 3000);
   };
 
-  let buttonHTML;
-
   document
     .querySelector("#contact-form")
     .addEventListener("submit", (event, target) => {
@@ -81,11 +86,9 @@
         submitter.nextElementSibling.remove();
       }
 
-      if (!buttonHTML) {
-        buttonHTML = submitter.innerHTML;
-      }
+      const { classList: buttonTextClassList } = submitter.firstElementChild;
 
-      submitter.innerHTML = `<span><i class="iconify" data-icon="ei:spinner-3"></i></span>`;
+      buttonTextClassList.add("hidden");
 
       const formdata = Object.fromEntries(new FormData(target));
 
@@ -119,7 +122,7 @@
           );
         })
         .finally(() => {
-          submitter.innerHTML = buttonHTML;
+          buttonTextClassList.remove("hidden");
         });
     });
 </script>
