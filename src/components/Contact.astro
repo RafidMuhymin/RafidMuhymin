@@ -1,7 +1,11 @@
 <style is:global lang="scss">
   #contact-form {
-    label:not(input) {
+    label {
       @apply font-semibold;
+
+      input {
+        @apply font-regular;
+      }
     }
 
     .error,
