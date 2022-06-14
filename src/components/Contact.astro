@@ -77,7 +77,7 @@
 
   document
     .querySelector("#contact-form")
-    .addEventListener("submit", (event, target) => {
+    .addEventListener("submit", (event) => {
       event.preventDefault();
 
       const { submitter } = event;
@@ -90,13 +90,10 @@
 
       buttonTextClassList.add("hidden");
 
-      const formdata = Object.fromEntries(new FormData(target));
+      const formdata = new FormData(event.target);
 
       fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
         body: formdata,
       })
         .then((res) => res.text())
@@ -107,7 +104,7 @@
               `<p class="success">Successfully sent the message!</p>`
             );
 
-            target.reset();
+            event.target.reset();
           } else {
             insertAdjacentHTML(
               submitter,
