@@ -1,36 +1,14 @@
 ---
-import "../styles/global.scss";
-
 import About from "../components/About.astro";
 import Banner from "../components/Banner.astro";
 import Contact from "../components/Contact.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
 import Projects from "../components/Projects.astro";
+import MainLayout from "../layouts/MainLayout.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Rafid Muhymin Wafi</title>
-
-    <!-- Iconify -->
-    <script is:inline src="https://code.iconify.design/2/2.1.0/iconify.min.js">
-
-    </script>
-  </head>
-
-  <body class="bg-yellow-50">
-    <Header />
-
-    <main>
-      <Banner />
-      <About />
-      <Projects />
-      <Contact />
-    </main>
-
-    <Footer />
-  </body>
-</html>
+<MainLayout>
+  <Banner />
+  <About />
+  <Projects />
+  <Contact />
+</MainLayout>
