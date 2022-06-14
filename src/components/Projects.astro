@@ -1,3 +1,99 @@
-<section>
-    <h1>Projects</h1>
+---
+import projectsTitles from "../data/projects-titles.json";
+
+const projects = await Astro.glob("../pages/projects/*.md");
+
+const topProjectsTitles = projectsTitles.slice(0, 3);
+
+const topProjects = projects.filter((project) =>
+  topProjectsTitles.includes(project.frontmatter.title)
+);
+---
+
+<style lang="scss">
+  .project {
+    > div {
+      .links a {
+        @apply text-3xl;
+      }
+    }
+  }
+</style>
+
+<section class="bg-slate-900">
+  <div class="max-w-[1200px] mx-auto text-white p-8">
+    <h2 class="text-center text-red-500">Projects I have Worked On</h2>
+
+    <div class="flex flex-col justify-center">
+      {topProjects.map(async (project) => {
+        const {
+          title,
+          description,
+          screenshot_filename,
+          logo_filename,
+          live_demo,
+          github_repo,
+        } = project.frontmatter
+
+        const { default: src } = await (screenshot_filename
+          ? import(`../images/${screenshot_filename}.png`)
+          : logo_filename
+          ? import(`../images/${logo_filename}.svg`)
+          : {})
+
+        return (
+          <div class="project p-8 gap-6 flex flex-col md:flex-row justify-center items-center">
+            <img
+              src={src}
+              alt={title}
+              class:list={[
+                "md:w-[37.5%] rounded-lg",
+                { "bg-white p-8": !!logo_filename },
+              ]}
+            />
+
+            <div class="grid p-4 md:w-[62.5%]">
+              <h3 class="text-blue-500">{title}</h3>
+
+              <p>{description}</p>
+
+              <div class="links my-4 gap-3 flex justify-end items-center">
+                <a href={live_demo}>
+                  <i class="iconify" data-icon="logos:npm-icon" />
+                </a>
+
+                {() => {
+                  if (typeof github_repo === "string") {
+                    return (
+                      <a href={github_repo} style="filter: invert(180);">
+                        <i class="iconify" data-icon="logos:github-icon" />
+                      </a>
+                    )
+                  }
+
+                  return (
+                    <Fragment>
+                      <a
+                        href={github_repo.client_side}
+                        style="filter: invert(180);"
+                      >
+                        <i class="iconify" data-icon="logos:github-icon" />
+                      </a>
+
+                      <a
+                        href={github_repo.server_side}
+                        style="filter: invert(180);"
+                      >
+                        <i class="iconify" data-icon="logos:github-icon" />
+                      </a>
+                    </Fragment>
+                  )
+                }}
+              </div>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  </div>
 </section>
