@@ -14,7 +14,7 @@ const topProjects = projects.filter((project) =>
   .project {
     > div {
       .links a {
-        @apply text-3xl;
+        @apply flex text-3xl hover:no-underline;
       }
     }
   }
@@ -59,13 +59,19 @@ const topProjects = projects.filter((project) =>
 
               <div class="links my-4 gap-3 flex justify-end items-center">
                 <a href={live_demo}>
-                  <i class="iconify" data-icon="logos:npm-icon" />
+                  <i
+                    class="iconify"
+                    data-icon={
+                      logo_filename ? "logos:npm-icon" : "bx:link-external"
+                    }
+                    data-width={!logo_filename && "2.375rem"}
+                  />
                 </a>
 
                 {() => {
                   if (typeof github_repo === "string") {
                     return (
-                      <a href={github_repo} style="filter: invert(180);">
+                      <a href={github_repo} class="invert">
                         <i class="iconify" data-icon="logos:github-icon" />
                       </a>
                     )
@@ -73,17 +79,11 @@ const topProjects = projects.filter((project) =>
 
                   return (
                     <Fragment>
-                      <a
-                        href={github_repo.client_side}
-                        style="filter: invert(180);"
-                      >
+                      <a href={github_repo.client_side} class="invert">
                         <i class="iconify" data-icon="logos:github-icon" />
                       </a>
 
-                      <a
-                        href={github_repo.server_side}
-                        style="filter: invert(180);"
-                      >
+                      <a href={github_repo.server_side} class="invert">
                         <i class="iconify" data-icon="logos:github-icon" />
                       </a>
                     </Fragment>
