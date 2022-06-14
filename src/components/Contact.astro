@@ -1,3 +1,28 @@
+<style is:global lang="scss">
+  #contact-form {
+    .error,
+    .success {
+      @apply font-bold text-lg text-center;
+    }
+
+    .error {
+      @apply text-red-600;
+    }
+
+    .success {
+      @apply text-green-500;
+    }
+
+    button > span {
+      @apply w-[8.75rem] text-center flex text-4xl -my-[0.125rem];
+
+      svg {
+        @apply mx-auto animate-spin;
+      }
+    }
+  }
+</style>
+
 <section class="px-8 pt-8 pb-12 bg-slate-900 text-gray-50">
   <div class="max-w-[640px] mx-auto">
     <div class="mb-8 text-center">
@@ -8,10 +33,8 @@
     </div>
 
     <form
-      method="POST"
-      action="/api/contact"
-      enctype="multipart/form-data"
-      class="gap-4 flex flex-col text-gray-300"
+      id="contact-form"
+      class="gap-4 flex flex-col text-gray-300 font-semibold"
     >
       <label class="gap-2 flex flex-col">
         Enter Your Full Name
@@ -24,50 +47,78 @@
       </label>
 
       <label class="gap-2 flex flex-col">
-        Enter Your Message
+        Enter Your Message or Question
         <textarea name="message" required></textarea>
       </label>
 
-      <button type="submit" class="mt-2 mx-auto btn"
-        >Send Message <i class="iconify" data-icon="bi:send"></i>
+      <button type="submit" class="mt-2 mx-auto btn">
+        Send Message <i class="iconify" data-icon="bi:send"></i>
       </button>
     </form>
   </div>
 </section>
 
-<!-- <script>
-  const EmailJSAPIEndpoint = "https://api.emailjs.com/api/v1.0/email/send",
-    service_id = "service_mcqyxho",
-    template_id = "template_5a42sr1",
-    user_id = "J17NaZ34EmhUYGdAW";
+<script>
+  const insertAdjacentHTML = (submitter, html) => {
+    submitter.insertAdjacentHTML("afterend", html);
+
+    setTimeout(() => {
+      submitter.nextElementSibling?.remove();
+    }, 3000);
+  };
+
+  let buttonHTML;
 
   document
     .querySelector("#contact-form")
-    .addEventListener("submit", (event) => {
+    .addEventListener("submit", (event, target) => {
       event.preventDefault();
 
-      const template_params = Object.fromEntries(new FormData(event.target));
+      const { submitter } = event;
 
-      fetch(EmailJSAPIEndpoint, {
+      if (submitter.nextElementSibling) {
+        submitter.nextElementSibling.remove();
+      }
+
+      if (!buttonHTML) {
+        buttonHTML = submitter.innerHTML;
+      }
+
+      submitter.innerHTML = `<span><i class="iconify" data-icon="ei:spinner-3"></i></span>`;
+
+      const formdata = Object.fromEntries(new FormData(target));
+
+      fetch("/api/contact", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
-        body: JSON.stringify({
-          service_id,
-          template_id,
-          user_id,
-          template_params,
-        }),
+        body: formdata,
       })
         .then((res) => res.text())
         .then((res) => {
           if (res === "OK") {
+            insertAdjacentHTML(
+              submitter,
+              `<p class="success">Successfully sent the message!</p>`
+            );
+
+            target.reset();
           } else {
+            insertAdjacentHTML(
+              submitter,
+              `<p class="error">An error occured! Couldn't send the message!</p>`
+            );
           }
         })
         .catch((error) => {
-          console.log(error);
+          insertAdjacentHTML(
+            submitter,
+            `<p class="error">An error occured! ${error.message}!</p>`
+          );
+        })
+        .finally(() => {
+          submitter.innerHTML = buttonHTML;
         });
     });
-</script> -->
+</script>
