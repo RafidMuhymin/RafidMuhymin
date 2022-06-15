@@ -75,10 +75,11 @@ button {
 
 a {
   color: #0070f3;
-}
+  text-underline-offset: 0.1875rem;
 
-a:hover {
-  text-decoration: underline;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 h1,
@@ -101,5 +102,5 @@ h4,
 h5,
 h6,
 p {
-  @apply my-3 mx-0;
+  margin: 0.75rem 0rem;
 }

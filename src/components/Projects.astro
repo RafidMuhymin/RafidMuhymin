@@ -47,6 +47,7 @@ const requiredProjects = projects.filter((project) =>
           description,
           screenshot_filename,
           logo_filename,
+          npm_package,
           live_demo,
           github_repo,
           stacks,
@@ -57,10 +58,6 @@ const requiredProjects = projects.filter((project) =>
           : logo_filename
           ? import(`../images/${logo_filename}.svg`)
           : {})
-
-        const hashedStacks = stacks
-          ?.map((stack) => `#${stack.replace("\\@", "@").toLowerCase()}`)
-          .join(" ")
 
         const { url: projectURL } = project
 
@@ -103,7 +100,10 @@ const requiredProjects = projects.filter((project) =>
               )}
 
               <div class="links my-4 gap-3 flex justify-end items-center">
-                <a href={live_demo}>
+                <a
+                  href={npm_package || live_demo}
+                  title={`${title} ${live_demo ? "Live Demo" : "NPM Package"}`}
+                >
                   <i
                     class="iconify"
                     data-icon={
@@ -116,7 +116,10 @@ const requiredProjects = projects.filter((project) =>
                 {() => {
                   if (typeof github_repo === "string") {
                     return (
-                      <a href={github_repo}>
+                      <a
+                        href={github_repo}
+                        title={`${title} GitHub Repository`}
+                      >
                         <i class="iconify" data-icon="logos:github-icon" />
                       </a>
                     )
@@ -124,11 +127,17 @@ const requiredProjects = projects.filter((project) =>
 
                   return (
                     <Fragment>
-                      <a href={github_repo.client_side}>
+                      <a
+                        href={github_repo.client_side}
+                        title={`${title} GitHub Repository`}
+                      >
                         <i class="iconify" data-icon="logos:github-icon" />
                       </a>
 
-                      <a href={github_repo.server_side}>
+                      <a
+                        href={github_repo.server_side}
+                        title={`${title} GitHub Repository`}
+                      >
                         <i class="iconify" data-icon="logos:github-icon" />
                       </a>
                     </Fragment>
