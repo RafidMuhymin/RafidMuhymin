@@ -1,7 +1,11 @@
 ---
 import projectsTitles from "../data/projects-titles.json";
 
-const { limit } = Astro.props;
+export interface Props {
+  limit?: number;
+}
+
+const { limit } = Astro.props as Props;
 
 const projects = await Astro.glob("../pages/projects/*.md");
 

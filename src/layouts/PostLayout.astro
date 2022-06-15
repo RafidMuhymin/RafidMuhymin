@@ -13,7 +13,7 @@ const {
 const { headers, source, html } = Astro.props.content.astro;
 ---
 
-<MainLayout>
+<MainLayout title={title}>
   <div class="max-w-[1200px] mx-auto p-8">
     {() => {
       if (import.meta.env.PROD) {
