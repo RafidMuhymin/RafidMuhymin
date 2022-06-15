@@ -1,13 +1,17 @@
 ---
 import projectsTitles from "../data/projects-titles.json";
 
+const { limit } = Astro.props;
+
 const projects = await Astro.glob("../pages/projects/*.md");
 
-const topProjectsTitles = projectsTitles.slice(0, 3);
+const requiredProjectsTitles = projectsTitles.slice(0, limit);
 
-const topProjects = projects.filter((project) =>
-  topProjectsTitles.includes(project.frontmatter.title)
+const requiredProjects = projects.filter((project) =>
+  requiredProjectsTitles.includes(project.frontmatter.title)
 );
+
+const isProjectsPage = new URL(Astro.request.url).pathname === "/projects";
 ---
 
 <style lang="scss">
@@ -20,12 +24,12 @@ const topProjects = projects.filter((project) =>
   }
 </style>
 
-<section id="projects" class="bg-slate-900">
-  <div class="max-w-[1200px] mx-auto text-white p-8">
+<section id="projects">
+  <div class="max-w-[1200px] mx-auto p-8">
     <h2 class="text-center text-red-500">Projects I have Worked On</h2>
 
     <div class="flex flex-col justify-center">
-      {topProjects.map(async (project) => {
+      {requiredProjects.map(async (project) => {
         const {
           title,
           description,
@@ -65,7 +69,7 @@ const topProjects = projects.filter((project) =>
               {stacks && (
                 <p>
                   <strong class="text-rose-600">STACKS: </strong>
-                  <span class="text-teal-500">{hashedStacks}</span>
+                  <span class="text-teal-700">{hashedStacks}</span>
                 </p>
               )}
 
@@ -83,7 +87,7 @@ const topProjects = projects.filter((project) =>
                 {() => {
                   if (typeof github_repo === "string") {
                     return (
-                      <a href={github_repo} class="invert">
+                      <a href={github_repo}>
                         <i class="iconify" data-icon="logos:github-icon" />
                       </a>
                     )
@@ -91,11 +95,11 @@ const topProjects = projects.filter((project) =>
 
                   return (
                     <Fragment>
-                      <a href={github_repo.client_side} class="invert">
+                      <a href={github_repo.client_side}>
                         <i class="iconify" data-icon="logos:github-icon" />
                       </a>
 
-                      <a href={github_repo.server_side} class="invert">
+                      <a href={github_repo.server_side}>
                         <i class="iconify" data-icon="logos:github-icon" />
                       </a>
                     </Fragment>

@@ -9,6 +9,7 @@ stacks:
   - \@loadable/component
   - \@mdx-js/mdx
   - \@mdx-js/react
+  - dotenv
   - elasticlunr
   - gatsby
   - gatsby-background-image
