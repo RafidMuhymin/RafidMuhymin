@@ -10,16 +10,19 @@ const requiredProjectsTitles = projectsTitles.slice(0, limit);
 const requiredProjects = projects.filter((project) =>
   requiredProjectsTitles.includes(project.frontmatter.title)
 );
-
-const isProjectsPage = new URL(Astro.request.url).pathname === "/projects";
 ---
 
 <style lang="scss">
   .project {
     > div {
+      a:first-child {
+        @apply underline-offset-[0.3125rem];
+      }
+
       .stacks {
         overflow: hidden;
         display: -webkit-box;
+        text-overflow: ellipsis;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 3;
       }
@@ -59,19 +62,25 @@ const isProjectsPage = new URL(Astro.request.url).pathname === "/projects";
           ?.map((stack) => `#${stack.replace("\\@", "@").toLowerCase()}`)
           .join(" ")
 
+        const { url: projectURL } = project
+
         return (
           <div class="project p-8 gap-6 flex flex-col md:flex-row justify-center items-center">
-            <img
-              src={src}
-              alt={title}
-              class:list={[
-                "md:w-[37.5%] rounded-lg drop-shadow-2xl",
-                { "bg-slate-900 p-8": !!logo_filename },
-              ]}
-            />
+            <a href={projectURL} class="md:w-[37.5%]">
+              <img
+                src={src}
+                alt={title}
+                class:list={[
+                  "rounded-lg drop-shadow-2xl",
+                  { "bg-slate-900 p-8": !!logo_filename },
+                ]}
+              />
+            </a>
 
             <div class="grid p-4 md:w-[62.5%]">
-              <h3 class="text-blue-600">{title}</h3>
+              <a href={projectURL}>
+                <h3 class="text-blue-600">{title}</h3>
+              </a>
 
               <p>{description}</p>
 
