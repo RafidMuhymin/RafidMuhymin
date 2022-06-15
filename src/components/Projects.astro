@@ -17,6 +17,13 @@ const isProjectsPage = new URL(Astro.request.url).pathname === "/projects";
 <style lang="scss">
   .project {
     > div {
+      .stacks {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+      }
+
       .links a {
         @apply flex text-3xl hover:no-underline;
       }
@@ -26,7 +33,9 @@ const isProjectsPage = new URL(Astro.request.url).pathname === "/projects";
 
 <section id="projects">
   <div class="max-w-[1200px] mx-auto p-8">
-    <h2 class="text-center text-red-500">Projects I have Worked On</h2>
+    <h2 class="text-center text-rose-600">
+      <span>Projects I have Worked On</span>
+    </h2>
 
     <div class="flex flex-col justify-center">
       {requiredProjects.map(async (project) => {
@@ -56,20 +65,20 @@ const isProjectsPage = new URL(Astro.request.url).pathname === "/projects";
               src={src}
               alt={title}
               class:list={[
-                "md:w-[37.5%] rounded-lg",
+                "md:w-[37.5%] rounded-lg drop-shadow-2xl",
                 { "bg-white p-8": !!logo_filename },
               ]}
             />
 
             <div class="grid p-4 md:w-[62.5%]">
-              <h3 class="text-blue-500">{title}</h3>
+              <h3 class="text-blue-600">{title}</h3>
 
               <p>{description}</p>
 
               {stacks && (
-                <p>
-                  <strong class="text-rose-600">STACKS: </strong>
-                  <span class="text-teal-700">{hashedStacks}</span>
+                <p class="stacks text-teal-700">
+                  <strong class="text-rose-600">#stacks: </strong>
+                  {hashedStacks}
                 </p>
               )}
 
