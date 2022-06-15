@@ -29,6 +29,11 @@ const requiredProjects = projects.filter((project) =>
         text-overflow: ellipsis;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 3;
+
+        &:hover {
+          overflow: visible;
+          -webkit-line-clamp: 1000;
+        }
       }
 
       .links a {
