@@ -87,7 +87,18 @@ const requiredProjects = projects.filter((project) =>
               {stacks && (
                 <p class="stacks text-teal-700">
                   <strong class="text-rose-600">#stacks: </strong>
-                  {hashedStacks}
+                  {stacks
+                    ?.map(
+                      (stack) => `#${stack.replace("\\@", "@").toLowerCase()}`
+                    )
+                    .map((stack) => (
+                      <a
+                        class="text-teal-700 hover:text-teal-600 transition-colors"
+                        href={`https://npmjs.com/packages/${stack}`}
+                      >
+                        {stack}{" "}
+                      </a>
+                    ))}
                 </p>
               )}
 
