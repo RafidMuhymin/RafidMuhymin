@@ -9,9 +9,8 @@
   outline: 1rem auto rgb(37, 99, 235);
 }
 
-hr {
-  border-width: 1.125px;
-  @apply border-slate-300;
+br {
+  user-select: none;
 }
 
 svg {
