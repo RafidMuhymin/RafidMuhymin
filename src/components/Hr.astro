@@ -1,0 +1,24 @@
+<style is:global lang="scss">
+  div.hr {
+    @apply mx-auto my-4 text-base text-[#f37335] gap-2 flex items-center;
+    max-width: min(1200px, 87.5%);
+
+    span {
+      @apply flex-grow h-[0.175rem];
+
+      &:first-of-type {
+        background-image: linear-gradient(45deg, #f37335 0%, #fdc830 100%);
+      }
+
+      &:last-of-type {
+        background-image: linear-gradient(-45deg, #f37335 0%, #fdc830 100%);
+      }
+    }
+  }
+</style>
+
+<div class="hr">
+  <span></span>
+  <i class="iconify" data-icon="charm:cross"> </i>
+  <span></span>
+</div>

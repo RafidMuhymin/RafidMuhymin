@@ -2,13 +2,14 @@
 import About from "../components/About.astro";
 import Banner from "../components/Banner.astro";
 import Contact from "../components/Contact.astro";
+import Hr from "../components/Hr.astro";
 import Projects from "../components/Projects.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 ---
 
 <MainLayout>
-  <Banner />
-  <About />
+  <Banner /><Hr />
+  <About /><Hr />
   <Projects limit={3} />
   <Contact />
 </MainLayout>
