@@ -33,6 +33,7 @@ const topProjects = projects.filter((project) =>
           logo_filename,
           live_demo,
           github_repo,
+          stacks,
         } = project.frontmatter
 
         const { default: src } = await (screenshot_filename
@@ -40,6 +41,10 @@ const topProjects = projects.filter((project) =>
           : logo_filename
           ? import(`../images/${logo_filename}.svg`)
           : {})
+
+        const hashedStacks = stacks
+          ?.map((stack) => `#${stack.replace("\\@", "@").toLowerCase()}`)
+          .join(" ")
 
         return (
           <div class="project p-8 gap-6 flex flex-col md:flex-row justify-center items-center">
@@ -56,6 +61,13 @@ const topProjects = projects.filter((project) =>
               <h3 class="text-blue-500">{title}</h3>
 
               <p>{description}</p>
+
+              {stacks && (
+                <p>
+                  <strong class="text-rose-600">STACKS: </strong>
+                  <span class="text-teal-500">{hashedStacks}</span>
+                </p>
+              )}
 
               <div class="links my-4 gap-3 flex justify-end items-center">
                 <a href={live_demo}>
