@@ -1,5 +1,5 @@
 ---
-draft: true
+layout: ../../layouts/PostLayout.astro
 title: Spark Plug
 description: Spark Plug is an inventory management website to hold stock for electric cars
 screenshot_filename: spark-plug

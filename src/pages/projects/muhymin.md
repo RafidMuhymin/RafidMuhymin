@@ -1,5 +1,5 @@
 ---
-draft: true
+layout: ../../layouts/PostLayout.astro
 title: The Muhymin Blog
 description: The Muhymin Blog is a personal blogging website.
 screenshot_filename: the-muhymin-blog

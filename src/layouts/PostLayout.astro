@@ -1,0 +1,26 @@
+---
+import MainLayout from "./MainLayout.astro";
+
+const {
+  title,
+  description,
+  screenshot_filename,
+  live_demo,
+  github_repo,
+  stacks,
+} = Astro.props.content;
+
+const { headers, source, html } = Astro.props.content.astro;
+---
+
+<MainLayout>
+  <div class="max-w-[1200px] mx-auto p-8">
+    {() => {
+      if (import.meta.env.PROD) {
+        return <h2 class="text-center">Coming Soon...</h2>
+      }
+
+      return <slot />
+    }}
+  </div>
+</MainLayout>

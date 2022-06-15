@@ -1,5 +1,5 @@
 ---
-draft: true
+layout: ../../layouts/PostLayout.astro
 title: Gears PC
 description: Gears PC is a website built for a PC parts manufacturing company that manufactures and sells computer parts.
 screenshot_filename: gears-pc

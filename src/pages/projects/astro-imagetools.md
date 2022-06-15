@@ -1,5 +1,5 @@
 ---
-draft: true
+layout: ../../layouts/PostLayout.astro
 title: Astro ImageTools
 description: Astro ImageTools is a collection of tools for the Astro JS framework to optimize and generate responsive image and background image sets.
 logo_filename: astro-full-logo-dark

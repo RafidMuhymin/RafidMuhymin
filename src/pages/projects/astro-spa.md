@@ -1,5 +1,5 @@
 ---
-draft: true
+layout: ../../layouts/PostLayout.astro
 title: Astro SPA
 description: A SPA framework for Astro JS that enables Single-Page-Application like navigation in a website built using Astro.
 logo_filename: astro-full-logo-dark
