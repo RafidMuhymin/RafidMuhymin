@@ -1,5 +1,15 @@
 {
   "names": {
     "rafid": "3d073b19a81504da145d5140bbf105fbe5be1a619309ec1641f104c74ae60f39"
+  },
+  "relays": {
+    "3d073b19a81504da145d5140bbf105fbe5be1a619309ec1641f104c74ae60f39": [
+      "wss://nos.lol/",
+      "wss://nostr.land/",
+      "wss://nostr.wine/",
+      "wss://purplerelay.com/",
+      "wss://relay.damus.io/",
+      "wss://relay.snort.social/"
+    ]
   }
 }
