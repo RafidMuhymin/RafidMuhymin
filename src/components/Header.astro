@@ -28,6 +28,10 @@
   }
 
   @media screen and (max-width: 639px) {
+    nav {
+      visibility: hidden;
+    }
+
     nav * {
       width: 0;
       height: 0;
@@ -57,7 +61,7 @@
         nav {
           width: 100%;
           display: flex;
-        }
+          visibility: visible;
 
         nav * {
           left: 0;
