@@ -144,6 +144,7 @@
       menu.checked = true;
 
       navLinks.forEach((navLink, index) => {
+        // Instead of using a dynamic duration, a dynamic leftEndPosition is used to avoid hiding the navLinks which finish animating first.
         const animationDuration = 500,
           leftStartPosition = "0%",
           leftEndPosition = `-${(navLinks.length - index) * 100}%`;
