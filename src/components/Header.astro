@@ -163,4 +163,19 @@
       });
     }
   });
+
+  navLinks.forEach((navLink) => {
+    const destinationURL = new URL(navLink.href);
+
+    if (
+      destinationURL.hash &&
+      destinationURL.origin === location.origin &&
+      destinationURL.pathname === location.pathname
+    ) {
+      navLink.addEventListener("click", () => {
+        menu.checked = false;
+        document.body.style.overflow = "auto";
+      });
+    }
+  });
 </script>
