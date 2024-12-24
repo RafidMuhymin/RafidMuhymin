@@ -30,13 +30,13 @@
   @media screen and (max-width: 639px) {
     nav {
       visibility: hidden;
-    }
 
-    nav * {
-      width: 0;
-      height: 0;
-      left: -100%;
-      position: relative;
+      * {
+        width: 0;
+        height: 0;
+        left: -100%;
+        position: relative;
+      }
     }
 
     input:checked {
@@ -63,17 +63,18 @@
           display: flex;
           visibility: visible;
 
-        nav * {
-          left: 0;
-          width: auto;
-          height: auto;
+          * {
+            left: 0;
+            width: auto;
+            height: auto;
+          }
         }
       }
     }
   }
 </style>
 
-<input tabindex={-1} type="checkbox" id="menu-button" class="hidden" />
+<input tabindex={-1} type="checkbox" id="menu" class="hidden" />
 
 <header
   class="bg-yellow-100 text-center px-6 pt-3 gap-0 sm:gap-4 flex sm:block lg:flex flex-col sm:flex-row sm:justify-between items-center"
@@ -84,8 +85,8 @@
     <h1 role="presentation">Rafid Muhymin Wafi</h1>
 
     <label
+      for="menu"
       tabindex={0}
-      for="menu-button"
       class="p-2 gap-2 flex flex-col sm:hidden hover:cursor-pointer select-none"
       onkeyup="event.key === 'Enter' && this.click()"
       onmousedown="event.preventDefault()"
@@ -118,45 +119,48 @@
 </svg>
 
 <script>
-  const menuButton = document.querySelector("#menu-button");
+  const menu = document.querySelector<HTMLInputElement>("#menu"),
+    navLinks =
+      menu.nextElementSibling.querySelectorAll<HTMLLinkElement>("nav *");
 
-  window.matchMedia("(min-width : 640px)").onchange = ({ matches }) => {
-    if (matches) {
-      document.body.style.overflow = "auto";
-    } else if (menuButton.checked) {
-      document.body.style.overflowY = "hidden";
-    }
-  };
+  window
+    .matchMedia("(min-width : 640px)")
+    .addEventListener("change", ({ matches }) => {
+      if (matches) {
+        document.body.style.overflow = "auto";
+      } else if (menu.checked) {
+        document.body.style.overflowY = "hidden";
+      }
+    });
 
-  menuButton.onclick = ({ target }) => {
-    const navlinks = target.nextElementSibling.querySelectorAll("nav *");
-
-    if (target.checked && window.innerWidth < 640) {
+  menu.addEventListener("change", () => {
+    if (menu.checked && window.innerWidth < 640) {
       document.body.style.overflow = "hidden";
 
-      navlinks.forEach((link, index) => {
-        link.animate({ left: ["-100%", 0] }, 200 + index * 100);
+      navLinks.forEach((navLink, index) => {
+        // @ts-ignore
+        navLink.animate({ left: ["-100%", 0] }, 200 + index * 100);
       });
     } else {
-      target.checked = true;
+      menu.checked = true;
 
-      navlinks.forEach((link, index) => {
+      navLinks.forEach((navLink, index) => {
         const animationDuration = 500,
           leftStartPosition = "0%",
-          leftEndPosition = `-${(navlinks.length - index) * 100}%`;
+          leftEndPosition = `-${(navLinks.length - index) * 100}%`;
 
-        const animation = link.animate(
+        const animation = navLink.animate(
           { left: [leftStartPosition, leftEndPosition] },
           animationDuration
         );
 
-        if (index === navlinks.length - 1) {
+        if (index === navLinks.length - 1) {
           animation.onfinish = () => {
-            target.checked = false;
+            menu.checked = false;
             document.body.style.overflow = "auto";
           };
         }
       });
     }
-  };
+  });
 </script>
