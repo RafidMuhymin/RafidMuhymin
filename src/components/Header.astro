@@ -123,19 +123,27 @@
     navLinks =
       menu.nextElementSibling.querySelectorAll<HTMLLinkElement>("nav *");
 
+  function enableScroll() {
+    document.body.style.position = "";
+  }
+
+  function disableScroll() {
+    document.body.style.position = "fixed";
+  }
+
   window
     .matchMedia("(min-width : 640px)")
     .addEventListener("change", ({ matches }) => {
       if (matches) {
-        document.body.style.overflow = "auto";
+        enableScroll();
       } else if (menu.checked) {
-        document.body.style.overflowY = "hidden";
+        disableScroll();
       }
     });
 
   menu.addEventListener("change", () => {
     if (menu.checked && window.innerWidth < 640) {
-      document.body.style.overflow = "hidden";
+      disableScroll();
 
       navLinks.forEach((navLink, index) => {
         navLink.animate({ left: ["-100%", "0%"] }, 200 + index * 100);
@@ -157,7 +165,8 @@
         if (index === navLinks.length - 1) {
           animation.onfinish = () => {
             menu.checked = false;
-            document.body.style.overflow = "auto";
+
+            enableScroll();
           };
         }
       });
@@ -174,7 +183,8 @@
     ) {
       navLink.addEventListener("click", () => {
         menu.checked = false;
-        document.body.style.overflow = "auto";
+
+        enableScroll();
       });
     }
   });
